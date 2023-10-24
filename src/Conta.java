@@ -1,5 +1,5 @@
+
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Conta {
     private String numeroConta, numeroAgencia;
@@ -9,25 +9,24 @@ public class Conta {
     public Conta(String numeroConta, String numeroAgencia, Cliente cliente) {
         this.numeroConta = numeroConta;
         this.numeroAgencia = numeroAgencia;
-        this.saldo = 0.0; 
+        this.saldo = 0.0;
         this.cliente = cliente;
     }
 
     public boolean sacar(double valor) {
-        if (valor <= 0 || valor > saldo) {
-            return false; 
-        } else {
-            saldo -= valor; 
-            return true; 
+        if (valor > 0 && valor <= saldo) {
+            saldo -= valor;
+            return true;
         }
+        return false;
     }
+
     public boolean depositar(double valor) {
         if (valor > 0) {
-            saldo += valor; 
-            return true; 
-        } else {
-            return false; 
+            saldo += valor;
+            return true;
         }
+        return false;
     }
 
     public String getNumeroConta() {
@@ -46,12 +45,16 @@ public class Conta {
         return cliente;
     }
 
-    public void transferir(Conta contaOrigem,Conta contaDestino,double valor) {
-        if(contaOrigem.getSaldo()>0 && contaDestino.getSaldo() >valor){
-            contaDestino.depositar(valor);
-            System.out.println("Saque realizado com sucesso !!");
-            
+    public boolean transferir(Conta contaDestino, double valor) {
+        if (valor > 0 && saldo >= valor) {
+            if (contaDestino.depositar(valor)) {
+                saldo -= valor;
+                System.out.println("Transferência realizada com sucesso!");
+                return true;
+            }
         }
+        System.out.println("Transferência não pôde ser concluída.");
+        return false;
     }
 }
 

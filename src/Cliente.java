@@ -1,3 +1,4 @@
+
 import java.time.LocalDate;
 
 public class Cliente {
@@ -31,6 +32,9 @@ public class Cliente {
     }
     public Conta getConta() {
         return conta;
+    }
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
 
 
