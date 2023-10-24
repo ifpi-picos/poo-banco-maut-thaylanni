@@ -1,10 +1,13 @@
+import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner prompt = new Scanner(System.in);
         boolean exec = true;
+        List<Conta> contas = new ArrayList<>(); 
         Conta conta = null; 
 
         do {
@@ -31,7 +34,6 @@ public class App {
                     System.out.println("Digite o ano do nascimento:");
                     int ano = prompt.nextInt();
                     prompt.nextLine(); 
-
                     LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
                     Cliente cliente = new Cliente(nome, cpf, null, dataNascimento);
 
@@ -43,7 +45,17 @@ public class App {
                         cliente.setEndereco(endereco);
                     }
 
-             
+                    System.out.println("Escolha o tipo de conta (1 - Conta Corrente, 2 - Conta Poupança):");
+                    int tipoConta = prompt.nextInt();
+                    prompt.nextLine(); 
+
+                    if (tipoConta == 1) {
+                        conta = new ContaCorrente(nome, nome, cliente, dia);
+                    } else if (tipoConta == 2) {
+                        conta = new ContaPoupanca(nome, nome, cliente, dia);
+                    }
+
+                    contas.add(conta); 
 
                     break;
 
@@ -51,9 +63,9 @@ public class App {
                     if (conta != null) {
                         System.out.println("Digite o valor que deseja sacar:");
                         double valorSaque = prompt.nextDouble();
-                        prompt.nextLine();
+                        prompt.nextLine(); 
 
-                        if (conta.getSaldo() >= valorSaque && conta.sacar(valorSaque)) {
+                        if (conta.sacar(valorSaque)) {
                             System.out.println("Saque de R$" + valorSaque + " realizado com sucesso.");
                         } else {
                             System.out.println("Saldo insuficiente ou valor de saque inválido.");
@@ -68,8 +80,7 @@ public class App {
                         System.out.println("Digite o valor que deseja depositar:");
                         double valorDeposito = prompt.nextDouble();
                         prompt.nextLine(); 
-
-                        if (valorDeposito > 0 && conta.depositar(valorDeposito)) {
+                        if (conta.depositar(valorDeposito)) {
                             System.out.println("Depósito de R$" + valorDeposito + " realizado com sucesso.");
                         } else {
                             System.out.println("Valor de depósito inválido.");
@@ -83,8 +94,23 @@ public class App {
                     if (conta != null) {
                         System.out.println("Digite o número da conta de destino:");
                         String numeroContaDestino = prompt.nextLine();
-                      
 
+                        
+                        Conta contaDestino = encontrarContaPorNumero(contas, numeroContaDestino);
+
+                        if (contaDestino != null) {
+                            System.out.println("Digite o valor que deseja transferir:");
+                            double valorTransferencia = prompt.nextDouble();
+                            prompt.nextLine();
+
+                            if (conta.transferir(contaDestino, valorTransferencia)) {
+                                System.out.println("Transferência de R$" + valorTransferencia + " para a conta " + numeroContaDestino + " realizada com sucesso.");
+                            } else {
+                                System.out.println("Transferência não pôde ser concluída. Verifique o valor ou saldo disponível.");
+                            }
+                        } else {
+                            System.out.println("Conta de destino não encontrada. Verifique o número da conta.");
+                        }
                     } else {
                         System.out.println("Nenhuma conta associada ao cliente. Crie uma conta primeiro.");
                     }
@@ -96,7 +122,18 @@ public class App {
             }
         } while (exec);
     }
+
+    public static Conta encontrarContaPorNumero(List<Conta> contas, String numeroConta) {
+        for (Conta conta : contas) {
+            if (conta.getNumeroConta().equals(numeroConta)) {
+                return conta;
+            }
+        }
+        return null;
+    }
 }
+
+   
 
 
 

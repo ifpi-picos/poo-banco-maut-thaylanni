@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Conta {
     private String numeroConta, numeroAgencia;
@@ -56,6 +57,15 @@ public class Conta {
         System.out.println("Transferência não pôde ser concluída.");
         return false;
     }
+    public Conta encontrarContaPorNumero(List<Conta> contas, String numeroConta) {
+    for (Conta conta : contas) {
+        if (conta.getNumeroConta().equals(numeroConta)) {
+            return conta;
+        }
+    }
+    return null; 
+}
+
 }
 
 
