@@ -3,9 +3,9 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class App {
-    public static void app (String[] args) {
+    public static void main(String[] args) {
         Scanner prompt = new Scanner(System.in);
-        boolean exec = true;
+        boolean exec = true; 
 
         do {
             System.out.println("#### MENU BANCO MAUT ####");
@@ -42,8 +42,6 @@ public class App {
                         String endereco = prompt.nextLine();
                         cliente.setEndereco(endereco);
                     }
-
-
                     break;
 
                 case 5:
@@ -53,4 +51,5 @@ public class App {
         } while (exec);
     }
 }
+
 
