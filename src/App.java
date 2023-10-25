@@ -25,20 +25,28 @@ public class App {
 
             switch (opt) {
                 case 1:
-                    System.out.println("Digite seu nome:");
-                    String nome = prompt.nextLine();
-                    System.out.println("Digite seu CPF:");
-                    String cpf = prompt.nextLine();
-                    System.out.println("Digite o dia do nascimento:");
-                    int dia = prompt.nextInt();
-                    System.out.println("Digite mês do nascimento:");
-                    int mes = prompt.nextInt();
-                    System.out.println("Digite o ano do nascimento:");
-                    int ano = prompt.nextInt();
-                    prompt.nextLine(); 
-                    LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
-                    Cliente cliente = new Cliente(nome, cpf, null, dataNascimento);
-
+                System.out.println("Digite seu nome:");
+                String nome = prompt.nextLine();
+                System.out.println("Digite seu CPF:");
+                String cpf = prompt.nextLine();
+                System.out.println("Digite o dia do nascimento:");
+                int dia = prompt.nextInt();
+                System.out.println("Digite mês do nascimento:");
+                int mes = prompt.nextInt();
+                System.out.println("Digite o ano do nascimento:");
+                int ano = prompt.nextInt();
+                prompt.nextLine();
+                System.out.println("Bairro: ");
+                String bairro = prompt.nextLine();
+                System.out.println("Cidade: ");
+                String cidade = prompt.nextLine();
+                System.out.println("Estado: ");
+                String estado = prompt.nextLine();
+                System.out.println("País: ");
+                String pais = prompt.nextLine();
+                LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
+                Cliente cliente = new Cliente(nome, cpf, null, dataNascimento);
+    
                     System.out.println("Deseja adicionar endereço (S/N)?");
                     String resp = prompt.nextLine();
                     if (resp.equalsIgnoreCase("S")) {
@@ -138,7 +146,6 @@ public class App {
     }
 }
 
-   
 
 
 
