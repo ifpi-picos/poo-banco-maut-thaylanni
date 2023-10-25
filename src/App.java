@@ -9,6 +9,8 @@ public class App {
         boolean exec = true;
         List<Conta> contas = new ArrayList<>(); 
         Conta conta = null; 
+        String agencia =  "1";
+        int contador = 1;
 
         do {
             System.out.println("#### MENU BANCO MAUT ####");
@@ -50,9 +52,9 @@ public class App {
                     prompt.nextLine(); 
 
                     if (tipoConta == 1) {
-                        conta = new ContaCorrente(nome, nome, cliente, dia);
+                        conta = new ContaCorrente(agencia, String.valueOf(contador++), cliente, dia);
                     } else if (tipoConta == 2) {
-                        conta = new ContaPoupanca(nome, nome, cliente, dia);
+                        conta = new ContaPoupanca(agencia, String.valueOf(contador++), cliente, dia);
                     }
 
                     contas.add(conta); 
