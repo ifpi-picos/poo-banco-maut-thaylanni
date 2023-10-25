@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 import java.util.List;
 
-public class Conta {
+public abstract class Conta {
     private String numeroConta, numeroAgencia;
     private double saldo;
     private Cliente cliente;
 
-    public Conta(String numeroConta, String numeroAgencia, Cliente cliente) {
+    public Conta (String numeroConta, String numeroAgencia, Cliente cliente) {
         this.numeroConta = numeroConta;
         this.numeroAgencia = numeroAgencia;
         this.saldo = 0.0;
