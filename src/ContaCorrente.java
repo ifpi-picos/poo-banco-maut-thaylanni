@@ -1,5 +1,5 @@
 
-class ContaCorrente extends Conta {
+public class ContaCorrente extends Conta {
     private double chequeEspecial;
     private int transferenciasRealizadas;
 
@@ -20,4 +20,21 @@ class ContaCorrente extends Conta {
     public void incrementarTransferencia() {
         transferenciasRealizadas++;
     }
+
+  
+    public void transferencia(double valor, Conta destino) {
+        if (transferenciasRealizadas < 2) {
+            super.transferir(destino, valor); 
+        } else {
+            double valorComTaxa = valor + (valor * 0.10);
+            if (getSaldo() + chequeEspecial >= valorComTaxa) {
+                super.transferir(destino, valorComTaxa);
+                System.out.println("Transferência realizada com sucesso. Taxa de transferência aplicada: 10%");
+            } else {
+                System.out.println("Saldo insuficiente para realizar a transferência.");
+            }
+        }
+        incrementarTransferencia();
+    }
 }
+
