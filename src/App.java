@@ -65,9 +65,10 @@ public class App {
                         double valorSaque = prompt.nextDouble();
                         prompt.nextLine(); 
 
-                        if (conta.sacar(valorSaque)) {
+                        if (valorSaque < conta.getSaldo()) {
+                            conta.sacar(valorSaque);
                             System.out.println("Saque de R$" + valorSaque + " realizado com sucesso.");
-                        } else {
+                        } else if(valorSaque > conta.getSaldo()){
                             System.out.println("Saldo insuficiente ou valor de saque inválido.");
                         }
                     } else {
@@ -80,9 +81,10 @@ public class App {
                         System.out.println("Digite o valor que deseja depositar:");
                         double valorDeposito = prompt.nextDouble();
                         prompt.nextLine(); 
-                        if (conta.depositar(valorDeposito)) {
+                        if (valorDeposito > 0) {
+                            conta.depositar(valorDeposito);
                             System.out.println("Depósito de R$" + valorDeposito + " realizado com sucesso.");
-                        } else {
+                        } else if(valorDeposito < 0){
                             System.out.println("Valor de depósito inválido.");
                         }
                     } else {
@@ -103,9 +105,10 @@ public class App {
                             double valorTransferencia = prompt.nextDouble();
                             prompt.nextLine();
 
-                            if (conta.transferir(contaDestino, valorTransferencia)) {
+                            if (valorTransferencia > 0) {
+                                conta.transferir(contaDestino, valorTransferencia);
                                 System.out.println("Transferência de R$" + valorTransferencia + " para a conta " + numeroContaDestino + " realizada com sucesso.");
-                            } else {
+                            } else if(valorTransferencia < 0 ) {
                                 System.out.println("Transferência não pôde ser concluída. Verifique o valor ou saldo disponível.");
                             }
                         } else {
