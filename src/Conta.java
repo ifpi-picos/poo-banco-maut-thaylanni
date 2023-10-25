@@ -49,7 +49,6 @@ public class Conta {
         return cliente;
     }
  
-    
     public boolean transferir(Conta contaDestino, double valor) {
         if (valor > 0 && saldo >= valor) {
             if (contaDestino.depositar(valor)) {
