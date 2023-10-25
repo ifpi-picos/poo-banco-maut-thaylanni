@@ -62,7 +62,7 @@ public class Conta {
     }
 
     private void notificarOperacao(String mensagem) {
-        // Implemente a lógica de notificação aqui, por exemplo, exibindo a mensagem em um registro ou enviando-a por e-mail.
+       
         System.out.println(mensagem);
     }
 
